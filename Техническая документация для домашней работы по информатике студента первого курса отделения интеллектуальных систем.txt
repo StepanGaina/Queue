@@ -1,0 +1,92 @@
+План тестирования
+
+1.Проверить функцию init
+	1)Создать очередь
+	2)С момщью функции size получить значение(оно должно быть ноль)
+
+2.Проверить фцнкцию enqueue
+	1)Взять очередь
+	2)Добавить в неё элемент
+	3)Проверить, на сколько увеличилось значение
+	4)Добавить в неё None и проверить, что очередь не увеличилась
+3.Проверить функцию dequeue
+	1)Взять очередь
+	2)Добавить в неё чего-нибудь
+	3)Вынуть чего-нибудь
+	4)Посмотреть, изменился ли размер очереди
+	5)Добавить чего-небуть и удалить всё что добавил
+	:)Проверить, опустела ли очередь
+4.Проверить функцию front
+	1)Создать очередь
+	2)Ничего не добавлять
+	3)Проверить, что first is none
+5.Проверить функцию back
+	1)Создать очередь
+	2)Ничего не добавлять
+	3)Проверить, что last is none
+6.Проверить функцию size
+	1)Взять очередь
+	2)Добавить в неё элемент
+	3)Проверить, повышается ли размер/понижается ли размер
+7.Проверить функцию clear
+	1)Создать очередь
+	2)Положить чего-то туда
+	3)Применить clear
+	4)Посмотреть, что получится(очередь должна опустеть)
+
+
+
+
+class Node:
+
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+
+class Queue:
+
+    def __init__(self):
+        self.first = self.last = None
+        self.queuesize = 0
+
+    def front(self):
+        if self.queuesize == 0:
+            return None
+        else:
+            return self.first.value
+
+
+    def back(self):
+        if self.queuesize == 0:
+            return None
+        else:
+            return self.last.value
+
+    def enqueue(self, value):
+        newnode = Node(value)
+
+        if self.queuesize == 0:
+            self.first = self.last = newnode
+        else:
+            self.last.next = newnode
+            self.last = newnode
+        self.queuesize = self.queuesize + 1
+
+    def dequeue(self):
+
+        if self.first is None:
+            return None
+        else:
+            self.queuesize = self.queuesize - 1
+            remnode = self.first
+            self.first = self.first.next
+            return remnode.value
+
+    def size(self):
+        return self.queuesize
+
+    def clear(self):
+        self.first = self.last = None
+        self.queuesize = 0
